@@ -65,6 +65,16 @@ if [ -f "$file" ]; then
     pip install -r $file
 fi
 
+# FIX permissions just in case user has mounted the odoo folder
+chown -R odoo:odoo /opt/odoo
+
+# Allow the use of environment vars in /etc/odoo/odoo.conf
+file="/etc/odoo/odoo.tpl"
+if [ -f "$file" ]; then
+    echo "Applying enviroment vars to odoo configuration file"
+    envsubst < /etc/odoo/odoo.tpl > /etc/odoo/odoo.conf
+fi
+
 echo "Running command..."
 for arg in "$*"
 do

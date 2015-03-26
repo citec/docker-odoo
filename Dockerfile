@@ -14,6 +14,7 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/
         apt-get update && \
         apt-get -yq install \
             adduser \
+            gettext-base \
             ghostscript \
             postgresql-client-9.3 \
             libpq-dev \
@@ -23,6 +24,7 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/
                 python-dev \
                 python-pip \
                 python-imaging \
+                python-pil \
                 python-pychart python-libxslt1 xfonts-base xfonts-75dpi \
                 libxrender1 libxext6 fontconfig \
                 python-zsi \
@@ -44,6 +46,10 @@ RUN pip install -r /opt/odoo/requirements.txt
 # create the odoo user
 RUN adduser --home=/opt/odoo --disabled-password --gecos "" --shell=/bin/bash odoo
 RUN chown -R odoo:odoo /opt/odoo
+
+# Odoo data folder
+RUN mkdir /opt/odoo_data
+RUN chown -R odoo:odoo /opt/odoo_data
 
 # Boot the environment up
 USER 0
