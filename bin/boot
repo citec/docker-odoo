@@ -59,6 +59,12 @@ if [ -f "$file" ]; then
     source $file
 fi
 
+file="/app/requirements.txt"
+if [ -f "$file" ]; then
+    echo "Installing extra python requirements"
+    pip install -r $file
+fi
+
 echo "Running command..."
 for arg in "$*"
 do
