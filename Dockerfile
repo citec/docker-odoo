@@ -23,6 +23,7 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/
             python \
                 python-dev \
                 python-pip \
+                libjpeg-dev libjpeg8-dev libfreetype6-dev zlib1g-dev libpng12-dev \
                 python-imaging \
                 python-pil \
                 python-pychart python-libxslt1 xfonts-base xfonts-75dpi \
