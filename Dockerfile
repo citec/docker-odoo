@@ -43,6 +43,11 @@ RUN wget -O /tmp/odoo.zip https://github.com/odoo/odoo/archive/8.0.zip && \
 #ADD requirements.txt /app/requirements.txt
 RUN pip install -r /opt/odoo/requirements.txt
 
+# install wkhtmltopdf based on QT5
+ADD http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb /opt/sources/wkhtmltox.deb
+RUN dpkg -i /opt/sources/wkhtmltox.deb
+RUN rm /opt/sources/wkhtmltox.deb
+
 # create the odoo user
 RUN adduser --home=/opt/odoo --disabled-password --gecos "" --shell=/bin/bash odoo
 RUN chown -R odoo:odoo /opt/odoo
