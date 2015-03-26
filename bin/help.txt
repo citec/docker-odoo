@@ -1,0 +1,28 @@
+Usage: docker run [OPTIONS] grupocitec/odoo[:TAG] [COMMAND ...]
+
+Run odoo in a docker container.
+
+Positional arguments:
+  COMMAND          The command to run. (default: help)
+
+Commands:
+  help             Show this help message
+  start            Run odoo server in the background (accept additional arguments passed to odoo command)
+  login            Run in shell mode as root(if blank) or any other user(if specified)
+
+Requirements:
+    postgres database:
+        You need a postgresql backing service. It should be in another container, you can link them in order to give odoo access to it, ALWAYS AS 'db'
+        $ docker run -d --link mypostgrescontainername:db grupocitec/odoo start
+
+Optional setup files:
+    environment.sh:
+        Mount a file in /app/environment.sh and it will be ran at boot
+        $ docker run -t -i -v $(pwd -P)/environment.sh:/app/environment.sh grupocitec/ubuntubase
+
+    boot.sh:
+        Mount a file in /app/boot.sh and it will be ran at boot
+        $ docker run -t -i -v $(pwd -P)/boot.sh:/app/boot.sh grupocitec/ubuntubase
+
+Available tags:
+    grupocitec/odoo:8.0 -> odoo v8.0
