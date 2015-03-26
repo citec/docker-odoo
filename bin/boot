@@ -15,7 +15,7 @@ function help {
 function login  {
     echo "Running bash"
     set +e
-    if [[ ! -e $1 ]] 
+    if [[ ! -z "$1" ]] 
         then
             sudo su - $1
         else
@@ -28,7 +28,7 @@ function login  {
 function start {
     echo "Running odoo..."
     set +e
-    if [ ! -e $1 ]; then
+    if [ ! -z "$1" ]; then
         echo "...with additional args: $*"
     fi
     sudo -i -u odoo /usr/bin/python \
