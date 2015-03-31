@@ -24,7 +24,6 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/
                 python-pip \
                 libjpeg-dev libjpeg8-dev libfreetype6-dev zlib1g-dev libpng12-dev \
                 python-imaging \
-                python-pil \
                 python-pychart python-libxslt1 xfonts-base xfonts-75dpi \
                 libxrender1 libxext6 fontconfig \
                 python-zsi \
@@ -32,6 +31,7 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/
                 python-lxml \
                 libxml2-dev libxslt1-dev \
                 libldap2-dev libsasl2-dev libssl-dev
+RUN pip install PIL
 
 # Download and unzip odoo 8.0
 RUN wget -O /tmp/odoo.zip https://github.com/odoo/odoo/archive/8.0.zip && \
