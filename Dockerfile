@@ -32,6 +32,7 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/
                 libxml2-dev libxslt1-dev \
                 libldap2-dev libsasl2-dev libssl-dev
 RUN pip install PIL
+RUN apt-get install sudo
 
 # Download and unzip odoo 8.0
 RUN wget -O /tmp/odoo.zip https://github.com/odoo/odoo/archive/8.0.zip && \
