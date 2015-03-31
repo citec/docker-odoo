@@ -1,4 +1,4 @@
-FROM grupocitec/ubuntubase
+FROM grupocitec/ubuntubase:13.10
 MAINTAINER GrupoCITEC <ops@grupocitec.com>
 
 # Add the PostgreSQL PGP key to verify their Debian packages.
