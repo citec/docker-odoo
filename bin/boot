@@ -32,7 +32,7 @@ function start {
         echo "...with additional args: $*"
     fi
     sudo -i -u odoo /usr/bin/python \
-                    /opt/odoo/openerp-server \
+                    /opt/odoo/odoo.py \
                     -c /etc/odoo/odoo.conf \
                     $*
     SERVICE_PID=$!
