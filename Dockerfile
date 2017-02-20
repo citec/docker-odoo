@@ -34,6 +34,9 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/
 RUN pip install PIL
 RUN apt-get install -y sudo
 
+# Install PIL
+RUN pip install Pillow
+
 # Download and unzip odoo 8.0
 RUN wget -O /tmp/odoo.zip https://github.com/odoo/odoo/archive/8.0.zip && \
     unzip -d /odoo /tmp/odoo.zip && \
@@ -45,9 +48,13 @@ RUN wget -O /tmp/odoo.zip https://github.com/odoo/odoo/archive/8.0.zip && \
 RUN pip install -r /opt/odoo/requirements.txt
 
 # install wkhtmltopdf based on QT5
-ADD http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb /opt/sources/wkhtmltox.deb
-RUN dpkg -i /opt/sources/wkhtmltox.deb
-RUN rm /opt/sources/wkhtmltox.deb
+ADD http://download.gna.org/wkhtmltopdf/0.12/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz /opt/sources/wkhtmltox.tar.xz
+WORKDIR /opt/sources
+RUN tar xvf /opt/sources/wkhtmltox.tar.xz
+RUN chmod a+x /opt/sources/wkhtmltox/bin/wkhtmlto*
+RUN ln -s /opt/sources/wkhtmltox/bin/wkhtmltopdf /usr/local/sbin/wkwkhtmltopdf
+RUN ln -s /opt/sources/wkhtmltox/bin/wkhtmltoimage /usr/local/sbin/wkwkhtmltoimage
+RUN rm /opt/sources/wkhtmltox.tar.xz
 
 # create the odoo user
 RUN adduser --home=/opt/odoo --disabled-password --gecos "" --shell=/bin/bash odoo
