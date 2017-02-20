@@ -31,7 +31,6 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/
                 python-lxml \
                 libxml2-dev libxslt1-dev \
                 libldap2-dev libsasl2-dev libssl-dev
-RUN pip install PIL
 RUN apt-get install -y sudo
 
 # Install PIL
