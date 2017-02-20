@@ -5,8 +5,7 @@ MAINTAINER GrupoCITEC <ops@grupocitec.com>
 # It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
 
-# Add PostgreSQL's repository. It contains the most recent stable release
-#     of PostgreSQL, ``9.3``.
+# Add PostgreSQL's repository. It contains the most recent stable release of PostgreSQL, 
 # install dependencies as distrib packages when system bindings are required
 # some of them extend the basic odoo requirements for a better "apps" compatibility
 # most dependencies are distributed as wheel packages at the next step
@@ -16,7 +15,7 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/
             adduser \
             gettext-base \
             ghostscript \
-            postgresql-client-9.3 \
+            postgresql-client \
             libpq-dev \
             wget \
             unzip \
