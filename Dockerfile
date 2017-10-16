@@ -51,8 +51,8 @@ ADD http://download.gna.org/wkhtmltopdf/0.12/0.12.4/wkhtmltox-0.12.4_linux-gener
 WORKDIR /opt/sources
 RUN tar xvf /opt/sources/wkhtmltox.tar.xz
 RUN chmod a+x /opt/sources/wkhtmltox/bin/wkhtmlto*
-RUN ln -s /opt/sources/wkhtmltox/bin/wkhtmltopdf /usr/local/sbin/wkwkhtmltopdf
-RUN ln -s /opt/sources/wkhtmltox/bin/wkhtmltoimage /usr/local/sbin/wkwkhtmltoimage
+RUN ln -s /opt/sources/wkhtmltox/bin/wkhtmltopdf /usr/local/sbin/wkhtmltopdf
+RUN ln -s /opt/sources/wkhtmltox/bin/wkhtmltoimage /usr/local/sbin/wkhtmltoimage
 RUN rm /opt/sources/wkhtmltox.tar.xz
 
 # create the odoo user
