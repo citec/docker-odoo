@@ -1,4 +1,4 @@
-FROM grupocitec/ubuntubase
+FROM grupocitec/ubuntubase:16.04
 MAINTAINER GrupoCITEC <ops@grupocitec.com>
 
 # Add the PostgreSQL PGP key to verify their Debian packages.
@@ -43,10 +43,12 @@ RUN wget -O /tmp/odoo.zip https://github.com/odoo/odoo/archive/8.0.zip && \
 #ADD requirements.txt /app/requirements.txt
 RUN pip install -r /opt/odoo/requirements.txt
 
-# install wkhtmltopdf based on QT5
-ADD http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb /opt/sources/wkhtmltox.deb
-RUN dpkg -i /opt/sources/wkhtmltox.deb
-RUN rm /opt/sources/wkhtmltox.deb
+# Install wkhtmltox
+RUN mkdir /tmp/wkhtmltox
+WORKDIR /tmp/wkhtmltox
+RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+RUN tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz 
+RUN cp wkhtmltox/bin/wk* /usr/local/bin/
 
 # create the odoo user
 RUN adduser --home=/opt/odoo --disabled-password --gecos "" --shell=/bin/bash odoo
@@ -55,6 +57,15 @@ RUN chown -R odoo:odoo /opt/odoo
 # Odoo data folder
 RUN mkdir /opt/odoo_data
 RUN chown -R odoo:odoo /opt/odoo_data
+
+# Additional requirements
+RUN apt-get install -y  python-paramiko \
+                        libcurl4-openssl-dev python-pycurl \
+                        python-soappy \
+                        python-mysqldb \
+                        libffi-dev
+RUN pip install --upgrade pip
+RUN pip install xmltodict sqlalchemy pysftp pyinotify ipdb grequests
 
 # Boot the environment up
 USER 0
