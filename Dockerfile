@@ -1,6 +1,9 @@
 FROM grupocitec/ubuntubase:16.04
 MAINTAINER GrupoCITEC <ops@grupocitec.com>
 
+RUN apt-get update
+RUN apt-get install -y sudo
+
 # Add the PostgreSQL PGP key to verify their Debian packages.
 # It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
@@ -10,7 +13,6 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F
 # some of them extend the basic odoo requirements for a better "apps" compatibility
 # most dependencies are distributed as wheel packages at the next step
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
-        apt-get update && \
         apt-get -yq install \
             adduser \
             gettext-base \
